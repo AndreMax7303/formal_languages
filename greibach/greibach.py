@@ -60,11 +60,53 @@ def left_recursion_elimination(v, p_0):
             p[a_r].append(rhs_copy)
     return p
 
-def begin_with_terminal(p):
-    pass
 
-def terminal_followed_by_word_of_variables(p):
-    pass
+def begin_with_terminal(v, p_3):
+    p_4 = copy.deepcopy(p_3)
+    auxs = []
+    for a_r in p_4:
+        for rhs in p_4[a_r]:
+            if a_r in rhs:
+                auxs.append(a_r)
+    for i in range(len(list(p_4.keys())) - 2, -1, -1):
+        a_r = list(p_4.keys())[i]
+        if a_r not in auxs:
+            new_ps = []
+            for rhs in p_4[a_r]:
+                if rhs[0] in v:
+                    a_s = rhs[0]
+                    alpha = rhs[1::]
+                    p_4[a_r].remove(rhs)
+                    for rhs2 in p_4[a_s]:
+                        new_ps.append(rhs2 + alpha)
+            p_4[a_r] += new_ps
+    for a_r in auxs:
+        new_ps = []
+        excluir = []
+        for rhs in p_4[a_r]:
+            if rhs[0] in v:
+                a_s = rhs[0]
+                beta = rhs[1::]
+                excluir.append(rhs)
+                for rhs2 in p_4[a_s]:
+                    if rhs2[0] not in v:
+                        new_ps.append(rhs2 + beta)
+        p_4[a_r] += new_ps
+        for rhs in excluir:
+            p_4[a_r].remove(rhs)
+    return p_4
+
+
+def terminal_followed_by_word_of_variables(v, p):
+    p_5 = copy.deepcopy(p)
+    for a_r in p_5:
+        for rhs in p_5[a_r]:
+            for var in rhs:
+                if var not in v and rhs[0] != var:
+                    v.append(var.upper())
+                    rhs.replace(var, var.upper())
+                    p_5[var.upper()] = var
+    return p_5
 
 def print_prod(p):
     for key in p.keys():
@@ -96,16 +138,15 @@ def mk_example(ex_num, v_0, p_0):
         print(colored("Production set elimination of A_r → A_r α.", 'blue'))    
         p_i = left_recursion_elimination(v, p_i)
         print_prod(p_i)
-        print(colored("Each production begining with a terminal.", 'grey'))
-        p_i = begin_with_terminal(p_i)
-        pp.pprint("TO DO!")    
-        print(colored("Each production begining with a terminal followed by a word of variables.", 'grey'))
-        p_i = terminal_followed_by_word_of_variables(p_i)
-        pp.pprint("TO DO!")
+        print(colored("Each production begining with a terminal.", 'blue'))
+        p_i = begin_with_terminal(v, p_i)
+        print_prod(p_i)
+        print(colored("Each production begining with a terminal followed by a word of variables.", 'green'))
+        p_i = terminal_followed_by_word_of_variables(v, p_i)
+        print_prod(p_i)
     
 if __name__ == "__main__":
     print(colored("Examples of transformations from CFG to Greibach normal form", attrs=['bold']))
-
     ### Example 1
     v_0 = ["A", "S"]
     t = ["a", "b"]
