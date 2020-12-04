@@ -151,4 +151,20 @@ if __name__ == "__main__":
     M = (Sigma, Q, delta1, q0, F, V)
     w = "abba"
     pp.pprint(lifted_delta_clos([(w, "q0", [])], delta1))
+    print()
+    print("PDA for {a^nb^man+m}")
+    Sigma = {"a", "b"}
+    Q = {"q0", "q1", "q2", "qf"}
+    q0 = "q0"
+    F = {"qf"}
+    V = {"a", "b"}
+    delta1 = {"q0": [("a", "epsilon", "X", "q0"),
+                     ("epsilon", "epsilon", "epsilon", "q1")],
+              "q1": [("b", "epsilon", "X", "q1"),
+                     ("epsilon", "epsilon", "epsilon", "q2")],
+              "q2": [("a", "X", "epsilon", "q2"),
+                     ("?", "?", "epsilon", "qf")]}
+    M = (Sigma, Q, delta1, q0, F, V)
+    w = "aabbaaaa"
+    pp.pprint(lifted_delta_clos([(w, "q0", [])], delta1))
     

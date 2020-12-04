@@ -1,0 +1,89 @@
+PDA for {a^nb^man+m}
+aabbaaaa q0 []
+==[('a', 'epsilon', 'X', 'q0')]==>
+abbaaaa q0 ['X']
+
+aabbaaaa q0 []
+==[('epsilon', 'epsilon', 'epsilon', 'q1')]==>
+aabbaaaa q1 []
+
+abbaaaa q0 ['X']
+==[('a', 'epsilon', 'X', 'q0')]==>
+bbaaaa q0 ['X', 'X']
+
+abbaaaa q0 ['X']
+==[('epsilon', 'epsilon', 'epsilon', 'q1')]==>
+abbaaaa q1 ['X']
+
+aabbaaaa q1 []
+==[('epsilon', 'epsilon', 'epsilon', 'q2')]==>
+aabbaaaa q2 []
+
+bbaaaa q0 ['X', 'X']
+==[('epsilon', 'epsilon', 'epsilon', 'q1')]==>
+bbaaaa q1 ['X', 'X']
+
+abbaaaa q1 ['X']
+==[('epsilon', 'epsilon', 'epsilon', 'q2')]==>
+abbaaaa q2 ['X']
+
+bbaaaa q1 ['X', 'X']
+==[('b', 'epsilon', 'X', 'q1')]==>
+baaaa q1 ['X', 'X', 'X']
+
+bbaaaa q1 ['X', 'X']
+==[('epsilon', 'epsilon', 'epsilon', 'q2')]==>
+bbaaaa q2 ['X', 'X']
+
+abbaaaa q2 ['X']
+==[('a', 'X', 'epsilon', 'q2')]==>
+bbaaaa q2 []
+
+baaaa q1 ['X', 'X', 'X']
+==[('b', 'epsilon', 'X', 'q1')]==>
+aaaa q1 ['X', 'X', 'X', 'X']
+
+baaaa q1 ['X', 'X', 'X']
+==[('epsilon', 'epsilon', 'epsilon', 'q2')]==>
+baaaa q2 ['X', 'X', 'X']
+
+aaaa q1 ['X', 'X', 'X', 'X']
+==[('epsilon', 'epsilon', 'epsilon', 'q2')]==>
+aaaa q2 ['X', 'X', 'X', 'X']
+
+aaaa q2 ['X', 'X', 'X', 'X']
+==[('a', 'X', 'epsilon', 'q2')]==>
+aaa q2 ['X', 'X', 'X']
+
+aaa q2 ['X', 'X', 'X']
+==[('a', 'X', 'epsilon', 'q2')]==>
+aa q2 ['X', 'X']
+
+aa q2 ['X', 'X']
+==[('a', 'X', 'epsilon', 'q2')]==>
+a q2 ['X']
+
+a q2 ['X']
+==[('a', 'X', 'epsilon', 'q2')]==>
+ q2 []
+
+ q2 []
+==[('?', '?', 'epsilon', 'qf')]==>
+ qf []
+
+[[('aabbaaaa', 'q0', [])],
+ [('abbaaaa', 'q0', ['X']), ('aabbaaaa', 'q1', [])],
+ [('bbaaaa', 'q0', ['X', 'X']),
+  ('abbaaaa', 'q1', ['X']),
+  ('aabbaaaa', 'q2', [])],
+ [('bbaaaa', 'q1', ['X', 'X']), ('abbaaaa', 'q2', ['X'])],
+ [('baaaa', 'q1', ['X', 'X', 'X']),
+  ('bbaaaa', 'q2', ['X', 'X']),
+  ('bbaaaa', 'q2', [])],
+ [('aaaa', 'q1', ['X', 'X', 'X', 'X']), ('baaaa', 'q2', ['X', 'X', 'X'])],
+ [('aaaa', 'q2', ['X', 'X', 'X', 'X'])],
+ [('aaa', 'q2', ['X', 'X', 'X'])],
+ [('aa', 'q2', ['X', 'X'])],
+ [('a', 'q2', ['X'])],
+ [('', 'q2', [])],
+ [('', 'qf', [])]]
